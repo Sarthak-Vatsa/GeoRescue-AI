@@ -1,0 +1,8 @@
+{
+  "projects": {
+    "default": "georescue-ai-backend",
+    "GeoRescue-AI": "geo-rescue-ai"
+  },
+  "targets": {},
+  "etags": {}
+}
