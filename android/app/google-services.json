@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355086128839",
+    "project_id": "geo-rescue-ai",
+    "storage_bucket": "geo-rescue-ai.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355086128839:android:528b809ca02f0a6d6450e2",
+        "android_client_info": {
+          "package_name": "com.georescue.victim"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC5duGuqLX7br9gCG2XICoeLgtUVwhPIT8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

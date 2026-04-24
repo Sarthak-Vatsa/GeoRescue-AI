@@ -1,0 +1,65 @@
+com.georescue.victim.app-lifecycle-runtime-ktx-2.7.0-0 /Users/orange/.gradle/caches/transforms-3/02cb13e68c6c17f0c261221a6565c026/transformed/lifecycle-runtime-ktx-2.7.0/res
+com.georescue.victim.app-ui-graphics-release-1 /Users/orange/.gradle/caches/transforms-3/07e1ff824ea0ca69ca67a99a866a9c8a/transformed/ui-graphics-release/res
+com.georescue.victim.app-play-services-maps-18.2.0-2 /Users/orange/.gradle/caches/transforms-3/11cfa7e2df88459e43ea6941123c0c70/transformed/play-services-maps-18.2.0/res
+com.georescue.victim.app-runtime-release-3 /Users/orange/.gradle/caches/transforms-3/11d0ede3356b60395c37cc2a150ec77e/transformed/runtime-release/res
+com.georescue.victim.app-runtime-saveable-release-4 /Users/orange/.gradle/caches/transforms-3/16e73960eb9aaa1f61cdb36ad843bb72/transformed/runtime-saveable-release/res
+com.georescue.victim.app-play-services-base-18.1.0-5 /Users/orange/.gradle/caches/transforms-3/18616a2092c02628193b7a4c9af55a7f/transformed/play-services-base-18.1.0/res
+com.georescue.victim.app-hilt-navigation-compose-1.1.0-6 /Users/orange/.gradle/caches/transforms-3/1e53a266d01b23a250cf23943724f759/transformed/hilt-navigation-compose-1.1.0/res
+com.georescue.victim.app-lifecycle-livedata-core-2.7.0-7 /Users/orange/.gradle/caches/transforms-3/205c27248e6d84cebd2d5bb16b5f3c28/transformed/lifecycle-livedata-core-2.7.0/res
+com.georescue.victim.app-core-runtime-2.2.0-8 /Users/orange/.gradle/caches/transforms-3/2861f91f1e4288c87fb47510dca93935/transformed/core-runtime-2.2.0/res
+com.georescue.victim.app-navigation-common-2.5.1-9 /Users/orange/.gradle/caches/transforms-3/28e0c64f763e770cdf08ecd9b8962d53/transformed/navigation-common-2.5.1/res
+com.georescue.victim.app-browser-1.4.0-10 /Users/orange/.gradle/caches/transforms-3/2ccb18bc0ccb3390e5929e5b0397d3ef/transformed/browser-1.4.0/res
+com.georescue.victim.app-customview-poolingcontainer-1.0.0-11 /Users/orange/.gradle/caches/transforms-3/312666641e779c625377a8bfe47d0ad0/transformed/customview-poolingcontainer-1.0.0/res
+com.georescue.victim.app-animation-core-release-12 /Users/orange/.gradle/caches/transforms-3/35ef8c97081281a9cbab9ea56dc2f4c6/transformed/animation-core-release/res
+com.georescue.victim.app-foundation-release-13 /Users/orange/.gradle/caches/transforms-3/385396c98f7608defdccb2f73357dccf/transformed/foundation-release/res
+com.georescue.victim.app-material3-1.1.2-14 /Users/orange/.gradle/caches/transforms-3/3f861c446f9ca3e516f84ae5a7a1400c/transformed/material3-1.1.2/res
+com.georescue.victim.app-ui-geometry-release-15 /Users/orange/.gradle/caches/transforms-3/4191ca224c5eb8b0809d61662a02f87f/transformed/ui-geometry-release/res
+com.georescue.victim.app-play-services-basement-18.1.0-16 /Users/orange/.gradle/caches/transforms-3/43b730bad549745df5d812382791360d/transformed/play-services-basement-18.1.0/res
+com.georescue.victim.app-ui-release-17 /Users/orange/.gradle/caches/transforms-3/4fda52a33e1ef5d7d11fd7e12c19a96f/transformed/ui-release/res
+com.georescue.victim.app-animation-release-18 /Users/orange/.gradle/caches/transforms-3/52aee4ecce355f4508160e1ec7007b39/transformed/animation-release/res
+com.georescue.victim.app-firebase-common-20.4.2-19 /Users/orange/.gradle/caches/transforms-3/56a850b30bed1911b01b8c489245d9ec/transformed/firebase-common-20.4.2/res
+com.georescue.victim.app-navigation-runtime-2.5.1-20 /Users/orange/.gradle/caches/transforms-3/5847d678f94ecc4ee9650573212638ef/transformed/navigation-runtime-2.5.1/res
+com.georescue.victim.app-navigation-runtime-ktx-2.5.1-21 /Users/orange/.gradle/caches/transforms-3/5c5465aeb8692e7982ec1bc6b094c665/transformed/navigation-runtime-ktx-2.5.1/res
+com.georescue.victim.app-navigation-common-ktx-2.5.1-22 /Users/orange/.gradle/caches/transforms-3/5e3883a836cbfaeb3a16720fa400fd0c/transformed/navigation-common-ktx-2.5.1/res
+com.georescue.victim.app-fragment-1.5.1-23 /Users/orange/.gradle/caches/transforms-3/5eaf506090cef79e8ee1afd46f99650f/transformed/fragment-1.5.1/res
+com.georescue.victim.app-maps-compose-4.3.0-24 /Users/orange/.gradle/caches/transforms-3/67e217aea58f5baeaf92995d879279ca/transformed/maps-compose-4.3.0/res
+com.georescue.victim.app-savedstate-ktx-1.2.1-25 /Users/orange/.gradle/caches/transforms-3/68acf487bbfe4b0e308f22f43ee6dc79/transformed/savedstate-ktx-1.2.1/res
+com.georescue.victim.app-ui-tooling-preview-release-26 /Users/orange/.gradle/caches/transforms-3/73b8d2aa45fea30fdcc7e93b188b1722/transformed/ui-tooling-preview-release/res
+com.georescue.victim.app-lifecycle-viewmodel-ktx-2.7.0-27 /Users/orange/.gradle/caches/transforms-3/795108bf65268f6c2e4c31df5dab221f/transformed/lifecycle-viewmodel-ktx-2.7.0/res
+com.georescue.victim.app-ui-tooling-release-28 /Users/orange/.gradle/caches/transforms-3/79e6dcbff45433ac0c2b26ff85cdbc58/transformed/ui-tooling-release/res
+com.georescue.victim.app-core-ktx-1.12.0-29 /Users/orange/.gradle/caches/transforms-3/7df520dfd4e4c1fd2867cabd5323aa20/transformed/core-ktx-1.12.0/res
+com.georescue.victim.app-startup-runtime-1.1.1-30 /Users/orange/.gradle/caches/transforms-3/81448972aaff8335308b5ad06959ec2b/transformed/startup-runtime-1.1.1/res
+com.georescue.victim.app-material-icons-core-release-31 /Users/orange/.gradle/caches/transforms-3/894e51f846d364a5fc49e9608287dea0/transformed/material-icons-core-release/res
+com.georescue.victim.app-lifecycle-runtime-2.7.0-32 /Users/orange/.gradle/caches/transforms-3/90b8db9140896b1024a08acbc4b692f1/transformed/lifecycle-runtime-2.7.0/res
+com.georescue.victim.app-ui-test-manifest-1.5.4-33 /Users/orange/.gradle/caches/transforms-3/96c93a4485e4e38b081dee6e75412cce/transformed/ui-test-manifest-1.5.4/res
+com.georescue.victim.app-core-1.12.0-34 /Users/orange/.gradle/caches/transforms-3/96df6878e2ae8e77f391f8d69d1b7194/transformed/core-1.12.0/res
+com.georescue.victim.app-activity-1.8.2-35 /Users/orange/.gradle/caches/transforms-3/9e4a1d884940241641857123e7541ea9/transformed/activity-1.8.2/res
+com.georescue.victim.app-lifecycle-viewmodel-2.7.0-36 /Users/orange/.gradle/caches/transforms-3/9fa94de01362bf69f3d2ff8e0227c5c8/transformed/lifecycle-viewmodel-2.7.0/res
+com.georescue.victim.app-lifecycle-viewmodel-compose-2.7.0-37 /Users/orange/.gradle/caches/transforms-3/a088e04b2f8c18229ae66f80359b1d30/transformed/lifecycle-viewmodel-compose-2.7.0/res
+com.georescue.victim.app-ui-tooling-data-release-38 /Users/orange/.gradle/caches/transforms-3/ae2530aab68cd4a31e83ff6079c9c431/transformed/ui-tooling-data-release/res
+com.georescue.victim.app-navigation-compose-2.5.1-39 /Users/orange/.gradle/caches/transforms-3/b04aaa4024d67d65ee792d72bf6170be/transformed/navigation-compose-2.5.1/res
+com.georescue.victim.app-lifecycle-livedata-2.7.0-40 /Users/orange/.gradle/caches/transforms-3/b135bcf43464e7ab1606ee60f366b694/transformed/lifecycle-livedata-2.7.0/res
+com.georescue.victim.app-foundation-layout-release-41 /Users/orange/.gradle/caches/transforms-3/b232e4934025f1805c17b4c9df4cd173/transformed/foundation-layout-release/res
+com.georescue.victim.app-lifecycle-process-2.7.0-42 /Users/orange/.gradle/caches/transforms-3/b5fc3f30bacda742aa8a26efc010619d/transformed/lifecycle-process-2.7.0/res
+com.georescue.victim.app-material-release-43 /Users/orange/.gradle/caches/transforms-3/bd77d752f2a905855d3b369130429380/transformed/material-release/res
+com.georescue.victim.app-lifecycle-viewmodel-savedstate-2.7.0-44 /Users/orange/.gradle/caches/transforms-3/beff5538cde9429db164a5687b452ff8/transformed/lifecycle-viewmodel-savedstate-2.7.0/res
+com.georescue.victim.app-material-ripple-release-45 /Users/orange/.gradle/caches/transforms-3/c078597e2f8f973280d862577823fd32/transformed/material-ripple-release/res
+com.georescue.victim.app-emoji2-1.4.0-46 /Users/orange/.gradle/caches/transforms-3/c8f5870921058af821a1a13e5653e7b9/transformed/emoji2-1.4.0/res
+com.georescue.victim.app-ui-unit-release-47 /Users/orange/.gradle/caches/transforms-3/ca08670c17c01a395176fd7d709358f4/transformed/ui-unit-release/res
+com.georescue.victim.app-ui-text-release-48 /Users/orange/.gradle/caches/transforms-3/d62ad24f6d1235c56bd8bf1a1e72711b/transformed/ui-text-release/res
+com.georescue.victim.app-hilt-navigation-1.1.0-49 /Users/orange/.gradle/caches/transforms-3/dcd7edf4ef816c0024e617c0b306f547/transformed/hilt-navigation-1.1.0/res
+com.georescue.victim.app-annotation-experimental-1.3.1-50 /Users/orange/.gradle/caches/transforms-3/e07db47fa2c31406617932c7841d8840/transformed/annotation-experimental-1.3.1/res
+com.georescue.victim.app-profileinstaller-1.3.0-51 /Users/orange/.gradle/caches/transforms-3/e20f122e309e0dda6eeebb967d7d5a33/transformed/profileinstaller-1.3.0/res
+com.georescue.victim.app-lifecycle-livedata-core-ktx-2.7.0-52 /Users/orange/.gradle/caches/transforms-3/e60a4bbddfc66c06e16644d6a871b592/transformed/lifecycle-livedata-core-ktx-2.7.0/res
+com.georescue.victim.app-savedstate-1.2.1-53 /Users/orange/.gradle/caches/transforms-3/e66083f86a7af54e74655b7758648908/transformed/savedstate-1.2.1/res
+com.georescue.victim.app-ui-util-release-54 /Users/orange/.gradle/caches/transforms-3/f5bd0d91cd981162fbedcdb05ebc6c20/transformed/ui-util-release/res
+com.georescue.victim.app-activity-ktx-1.8.2-55 /Users/orange/.gradle/caches/transforms-3/f66f9627a1c474cd6fb01822b86a4b14/transformed/activity-ktx-1.8.2/res
+com.georescue.victim.app-activity-compose-1.8.2-56 /Users/orange/.gradle/caches/transforms-3/f754148b900c3e451094149a967d40a9/transformed/activity-compose-1.8.2/res
+com.georescue.victim.app-firebase-messaging-23.4.0-57 /Users/orange/.gradle/caches/transforms-3/fbed39b76b92eb53723948f8a177c6e9/transformed/firebase-messaging-23.4.0/res
+com.georescue.victim.app-res-58 /Users/orange/Desktop/GeoRescue AI/android/app/build/generated/res/processDebugGoogleServices
+com.georescue.victim.app-resValues-59 /Users/orange/Desktop/GeoRescue AI/android/app/build/generated/res/resValues/debug
+com.georescue.victim.app-packageDebugResources-60 /Users/orange/Desktop/GeoRescue AI/android/app/build/intermediates/incremental/debug/packageDebugResources/merged.dir
+com.georescue.victim.app-packageDebugResources-61 /Users/orange/Desktop/GeoRescue AI/android/app/build/intermediates/incremental/debug/packageDebugResources/stripped.dir
+com.georescue.victim.app-merged_res-62 /Users/orange/Desktop/GeoRescue AI/android/app/build/intermediates/merged_res/debug
+com.georescue.victim.app-debug-63 /Users/orange/Desktop/GeoRescue AI/android/app/src/debug/res
+com.georescue.victim.app-main-64 /Users/orange/Desktop/GeoRescue AI/android/app/src/main/res
