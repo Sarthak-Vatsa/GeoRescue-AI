@@ -5,6 +5,7 @@ import android.app.PendingIntent
 import android.content.Context
 import android.content.Intent
 import android.os.Build
+import android.util.Log
 import com.georescue.victim.domain.models.RiskZone
 import com.google.android.gms.location.Geofence
 import com.google.android.gms.location.GeofencingClient
@@ -30,14 +31,17 @@ class GeofenceManager @Inject constructor(
 
     @SuppressLint("MissingPermission")
     fun addGeofences(riskZones: List<RiskZone>) {
-        if (riskZones.isEmpty()) return
+        if (riskZones.isEmpty()) {
+            Log.d("GEOFENCE_MANAGER", "No risk zones to add")
+            return
+        }
 
         val geofences = riskZones.map { zone ->
             Geofence.Builder()
                 .setRequestId(zone.zoneId)
                 .setCircularRegion(
-                    zone.center.lat,
-                    zone.center.lng,
+                    zone.center.latitude,
+                    zone.center.longitude,
                     zone.radius.toFloat()
                 )
                 .setExpirationDuration(Geofence.NEVER_EXPIRE)
@@ -45,15 +49,31 @@ class GeofenceManager @Inject constructor(
                 .build()
         }
 
+        Log.d("GEOFENCE_MANAGER", "Attempting to register ${geofences.size} geofences")
+
         val request = GeofencingRequest.Builder()
             .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
             .addGeofences(geofences)
             .build()
 
-        geofencingClient.addGeofences(request, geofencePendingIntent)
+        geofencingClient.addGeofences(request, geofencePendingIntent).run {
+            addOnSuccessListener {
+                Log.d("GEOFENCE_MANAGER", "Geofences registered successfully")
+            }
+            addOnFailureListener { e ->
+                Log.e("GEOFENCE_MANAGER", "Geofence registration failed: ${e.message}", e)
+            }
+        }
     }
 
     fun removeGeofences() {
-        geofencingClient.removeGeofences(geofencePendingIntent)
+        geofencingClient.removeGeofences(geofencePendingIntent).run {
+            addOnSuccessListener {
+                Log.d("GEOFENCE_MANAGER", "Geofences removed successfully")
+            }
+            addOnFailureListener { e ->
+                Log.e("GEOFENCE_MANAGER", "Failed to remove geofences: ${e.message}", e)
+            }
+        }
     }
 }
