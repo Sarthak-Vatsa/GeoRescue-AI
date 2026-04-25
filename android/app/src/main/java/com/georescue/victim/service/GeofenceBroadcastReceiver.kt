@@ -11,18 +11,18 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         val event = GeofencingEvent.fromIntent(intent) ?: return
         if (event.hasError()) {
-            Log.e("GeofenceReceiver", "Geofencing error: ${event.errorCode}")
+            //Log.e("GeofenceReceiver", "Geofencing error: ${event.errorCode}")
             return
         }
 
         val transition = event.geofenceTransition
         when (transition) {
             Geofence.GEOFENCE_TRANSITION_ENTER -> {
-                Log.d("GeofenceReceiver", "Entered Geofence")
+                //Log.d("GeofenceReceiver", "Entered Geofence")
                 startDetectionService(context)
             }
             Geofence.GEOFENCE_TRANSITION_EXIT -> {
-                Log.d("GeofenceReceiver", "Exited Geofence")
+                //Log.d("GeofenceReceiver", "Exited Geofence")
                 stopDetectionService(context)
             }
         }
@@ -33,7 +33,7 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
         val uid = sharedPrefs.getString("USER_UID", null)
 
         if (uid == null) {
-            Log.e("GeofenceReceiver", "UID not found. Skipping service start.")
+            //Log.e("GeofenceReceiver", "UID not found. Skipping service start.")
             return
         }
 

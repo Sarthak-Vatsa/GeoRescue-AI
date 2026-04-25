@@ -63,7 +63,7 @@ class MainActivity : ComponentActivity() {
             // Log notification status for debugging
             hasLocationPermission = true
             if (!notificationsGranted) {
-                Log.w("MainActivity", "Notification permission denied - Service might be silent")
+                //Log.w("MainActivity", "Notification permission denied - Service might be silent")
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
@@ -137,7 +137,7 @@ class MainActivity : ComponentActivity() {
 
             if (result.isSuccess) {
                 isAuthenticated = true
-                Log.d("MainActivity", "Auth success, starting monitoring")
+                //Log.d("MainActivity", "Auth success, starting monitoring")
                 maybeStartMonitoring()
             } else {
                 Log.e(
@@ -151,7 +151,7 @@ class MainActivity : ComponentActivity() {
 
     private fun maybeStartMonitoring() {
         if (isAuthenticated && hasLocationPermission) {
-            Log.d("MainActivity", "All conditions met → starting monitoring")
+            //Log.d("MainActivity", "All conditions met → starting monitoring")
             startMonitoring()
         } else {
             Log.d(

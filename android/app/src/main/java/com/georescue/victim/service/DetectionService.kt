@@ -50,7 +50,7 @@ class DetectionService : Service() {
     private fun startForegroundService() {
         createNotificationChannel()
 
-        Log.d("DETECTION_SERVICE", "Starting foreground service")
+        //Log.d("DETECTION_SERVICE", "Starting foreground service")
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("GeoRescue AI Active")
             .setContentText("Monitoring for risk in your area...")
@@ -61,7 +61,7 @@ class DetectionService : Service() {
 
         startForeground(NOTIFICATION_ID, notification)
 
-        Log.d("DETECTION_SERVICE", "Foreground service started")
+        //Log.d("DETECTION_SERVICE", "Foreground service started")
         
         setupRTDBPresence()
         startTelemetryStream()
@@ -74,17 +74,17 @@ class DetectionService : Service() {
 
         if (cachedUid != null) {
             // SUCCESS: We have the UID instantly, bypass Firebase Auth cold-start!
-            Log.d("DETECTION_SERVICE", "Found cached UID: $cachedUid. Writing to RTDB instantly.")
+            //Log.d("DETECTION_SERVICE", "Found cached UID: $cachedUid. Writing to RTDB instantly.")
             writePresence(cachedUid)
         } else {
             // FALLBACK: No cache found. Fall back to your original Auth listener logic.
-            Log.w("DETECTION_SERVICE", "No cached UID found. Waiting for Auth state...")
+            //Log.w("DETECTION_SERVICE", "No cached UID found. Waiting for Auth state...")
 
             val authStateListener = object : FirebaseAuth.AuthStateListener {
                 override fun onAuthStateChanged(firebaseAuth: FirebaseAuth) {
                     val resolvedUser = firebaseAuth.currentUser
                     if (resolvedUser != null) {
-                        Log.d("DETECTION_SERVICE", "Auth resolved via listener! UID: ${resolvedUser.uid}")
+                        //Log.d("DETECTION_SERVICE", "Auth resolved via listener! UID: ${resolvedUser.uid}")
                         writePresence(resolvedUser.uid)
                         auth.removeAuthStateListener(this) // Prevent memory leaks
                     }
@@ -95,7 +95,7 @@ class DetectionService : Service() {
     }
 
     private fun writePresence(userId: String) {
-        Log.d("DETECTION_SERVICE", "Setting presence for UID: $userId")
+        //Log.d("DETECTION_SERVICE", "Setting presence for UID: $userId")
         val presenceRef = database.getReference("presence").child(userId)
 
         // Set up the onDisconnect hook
@@ -104,11 +104,11 @@ class DetectionService : Service() {
             "lastSeen" to ServerValue.TIMESTAMP
         )
         presenceRef.onDisconnect().setValue(disconnectData).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Log.d("DETECTION_SERVICE", "onDisconnect hook set successfully")
-            } else {
-                Log.e("DETECTION_SERVICE", "Failed to set onDisconnect: ${it.exception?.message}")
-            }
+//            if (it.isSuccessful) {
+//                Log.d("DETECTION_SERVICE", "onDisconnect hook set successfully")
+//            } else {
+//                Log.e("DETECTION_SERVICE", "Failed to set onDisconnect: ${it.exception?.message}")
+//            }
         }
 
         // Set user to online
@@ -117,24 +117,24 @@ class DetectionService : Service() {
             "lastSeen" to ServerValue.TIMESTAMP
         )
         presenceRef.setValue(onlineData).addOnCompleteListener {
-            if (it.isSuccessful) {
-                Log.d("DETECTION_SERVICE", "User set to online")
-            } else {
-                Log.e("DETECTION_SERVICE", "Failed to set user to online: ${it.exception?.message}")
-            }
+//            if (it.isSuccessful) {
+//                Log.d("DETECTION_SERVICE", "User set to online")
+//            } else {
+//                Log.e("DETECTION_SERVICE", "Failed to set user to online: ${it.exception?.message}")
+//            }
         }
     }
 
     private fun startTelemetryStream() {
         serviceScope.launch {
-            Log.d("DETECTION_SERVICE", "Starting live telemetry stream")
+            //Log.d("DETECTION_SERVICE", "Starting live telemetry stream")
             liveStatusStreamer.startStreaming()
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        Log.d("DETECTION_SERVICE", "Service onDestroy called")
+        //Log.d("DETECTION_SERVICE", "Service onDestroy called")
         val userId = auth.currentUser?.uid
         if (userId != null) {
             val presenceRef = database.getReference("presence").child(userId)
