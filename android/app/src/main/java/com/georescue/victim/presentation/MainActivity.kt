@@ -38,13 +38,17 @@ class MainActivity : ComponentActivity() {
     @Inject lateinit var riskZoneRepository: RiskZoneRepository
     @Inject lateinit var geofenceManager: GeofenceManager
 
+    private var isAuthenticated = false
+    private var hasLocationPermission = false
+
     private var showBackgroundRationaleDialog by mutableStateOf(false)
 
     private val backgroundPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted ->
         if (isGranted) {
-            startMonitoring()
+            hasLocationPermission = true
+            maybeStartMonitoring()
         }
     }
 
@@ -57,14 +61,15 @@ class MainActivity : ComponentActivity() {
 
         if (fineLocationGranted || coarseLocationGranted) {
             // Log notification status for debugging
+            hasLocationPermission = true
             if (!notificationsGranted) {
-                Log.w("MainActivity", "Notification permission denied - Service might be silent")
+                //Log.w("MainActivity", "Notification permission denied - Service might be silent")
             }
 
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 showBackgroundRationaleDialog = true
             } else {
-                startMonitoring()
+                maybeStartMonitoring()
             }
         }
     }
@@ -122,13 +127,37 @@ class MainActivity : ComponentActivity() {
         }.toTypedArray()
 
         foregroundPermissionLauncher.launch(permissionsToRequest)
-        
-        signIn()
+
+        signInAndStartMonitoring()
     }
 
-    private fun signIn() {
+    private fun signInAndStartMonitoring() {
         CoroutineScope(Dispatchers.Main).launch {
-            authRepository.signInAnonymously()
+            val result = authRepository.signInAnonymously()
+
+            if (result.isSuccess) {
+                isAuthenticated = true
+                //Log.d("MainActivity", "Auth success, starting monitoring")
+                maybeStartMonitoring()
+            } else {
+                Log.e(
+                    "MainActivity",
+                    "Auth failed: ${result.exceptionOrNull()?.message}",
+                    result.exceptionOrNull()
+                )
+            }
+        }
+    }
+
+    private fun maybeStartMonitoring() {
+        if (isAuthenticated && hasLocationPermission) {
+            //Log.d("MainActivity", "All conditions met → starting monitoring")
+            startMonitoring()
+        } else {
+            Log.d(
+                "MainActivity",
+                "Waiting → auth=$isAuthenticated, permission=$hasLocationPermission"
+            )
         }
     }
 

@@ -32,7 +32,7 @@ class GeofenceManager @Inject constructor(
     @SuppressLint("MissingPermission")
     fun addGeofences(riskZones: List<RiskZone>) {
         if (riskZones.isEmpty()) {
-            Log.d("GEOFENCE_MANAGER", "No risk zones to add")
+            //Log.d("GEOFENCE_MANAGER", "No risk zones to add")
             return
         }
 
@@ -49,7 +49,7 @@ class GeofenceManager @Inject constructor(
                 .build()
         }
 
-        Log.d("GEOFENCE_MANAGER", "Attempting to register ${geofences.size} geofences")
+        //Log.d("GEOFENCE_MANAGER", "Attempting to register ${geofences.size} geofences")
 
         val request = GeofencingRequest.Builder()
             .setInitialTrigger(GeofencingRequest.INITIAL_TRIGGER_ENTER)
@@ -57,23 +57,23 @@ class GeofenceManager @Inject constructor(
             .build()
 
         geofencingClient.addGeofences(request, geofencePendingIntent).run {
-            addOnSuccessListener {
-                Log.d("GEOFENCE_MANAGER", "Geofences registered successfully")
-            }
-            addOnFailureListener { e ->
-                Log.e("GEOFENCE_MANAGER", "Geofence registration failed: ${e.message}", e)
-            }
+//            addOnSuccessListener {
+//                Log.d("GEOFENCE_MANAGER", "Geofences registered successfully")
+//            }
+//            addOnFailureListener { e ->
+//                Log.e("GEOFENCE_MANAGER", "Geofence registration failed: ${e.message}", e)
+//            }
         }
     }
 
     fun removeGeofences() {
         geofencingClient.removeGeofences(geofencePendingIntent).run {
-            addOnSuccessListener {
-                Log.d("GEOFENCE_MANAGER", "Geofences removed successfully")
-            }
-            addOnFailureListener { e ->
-                Log.e("GEOFENCE_MANAGER", "Failed to remove geofences: ${e.message}", e)
-            }
+//            addOnSuccessListener {
+//                Log.d("GEOFENCE_MANAGER", "Geofences removed successfully")
+//            }
+//            addOnFailureListener { e ->
+//                Log.e("GEOFENCE_MANAGER", "Failed to remove geofences: ${e.message}", e)
+//            }
         }
     }
 }

@@ -590,7 +590,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.georescue.victim.data.repository.AuthRepository 
-          return (T) new AuthRepository(singletonCImpl.provideFirebaseAuthProvider.get());
+          return (T) new AuthRepository(singletonCImpl.provideFirebaseAuthProvider.get(), ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           case 1: // com.google.firebase.auth.FirebaseAuth 
           return (T) FirebaseModule_ProvideFirebaseAuthFactory.provideFirebaseAuth();
