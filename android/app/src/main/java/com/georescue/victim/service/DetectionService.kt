@@ -6,6 +6,7 @@ import android.app.NotificationManager
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
+import android.util.Log
 import androidx.core.app.NotificationCompat
 import com.georescue.victim.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -47,6 +48,8 @@ class DetectionService : Service() {
 
     private fun startForegroundService() {
         createNotificationChannel()
+
+        Log.d("DETECTION_SERVICE", "Starting foreground service")
         val notification = NotificationCompat.Builder(this, CHANNEL_ID)
             .setContentTitle("GeoRescue AI Active")
             .setContentText("Monitoring for risk in your area...")
@@ -56,6 +59,8 @@ class DetectionService : Service() {
             .build()
 
         startForeground(NOTIFICATION_ID, notification)
+
+        Log.d("DETECTION_SERVICE", "Foreground service started")
         
         setupRTDBPresence()
         startTelemetryStream()

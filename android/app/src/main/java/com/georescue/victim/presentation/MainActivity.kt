@@ -1,6 +1,8 @@
 package com.georescue.victim.presentation
 
 import android.Manifest
+import android.R.attr.action
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
@@ -20,6 +22,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.georescue.victim.data.repository.AuthRepository
 import com.georescue.victim.data.repository.RiskZoneRepository
+import com.georescue.victim.service.DetectionService
 import com.georescue.victim.service.GeofenceManager
 import com.google.firebase.database.FirebaseDatabase
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,8 +53,14 @@ class MainActivity : ComponentActivity() {
     ) { permissions ->
         val fineLocationGranted = permissions[Manifest.permission.ACCESS_FINE_LOCATION] ?: false
         val coarseLocationGranted = permissions[Manifest.permission.ACCESS_COARSE_LOCATION] ?: false
+        val notificationsGranted = permissions[Manifest.permission.POST_NOTIFICATIONS] ?: true // Default true for older APIs
 
         if (fineLocationGranted || coarseLocationGranted) {
+            // Log notification status for debugging
+            if (!notificationsGranted) {
+                Log.w("MainActivity", "Notification permission denied - Service might be silent")
+            }
+
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
                 showBackgroundRationaleDialog = true
             } else {
@@ -62,7 +71,7 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
+
         setContent {
             Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
                 Text(text = "GeoRescue AI Initialized")
@@ -102,12 +111,17 @@ class MainActivity : ComponentActivity() {
             }
         }
 
-        foregroundPermissionLauncher.launch(
-            arrayOf(
-                Manifest.permission.ACCESS_FINE_LOCATION,
-                Manifest.permission.ACCESS_COARSE_LOCATION
-            )
-        )
+        // Inside onCreate, replace your existing launcher call:
+        val permissionsToRequest = mutableListOf(
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.ACCESS_COARSE_LOCATION
+        ).apply {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                add(Manifest.permission.POST_NOTIFICATIONS)
+            }
+        }.toTypedArray()
+
+        foregroundPermissionLauncher.launch(permissionsToRequest)
         
         signIn()
     }

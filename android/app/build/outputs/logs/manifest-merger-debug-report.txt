@@ -7,10 +7,10 @@ INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidMan
 	android:name
 		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:26:13-58
 manifest
-ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-49:12
-INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-49:12
-INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-49:12
-INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-49:12
+ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-50:12
+INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:2:1-50:12
 MERGED from [com.google.maps.android:maps-compose:4.3.0] /Users/orange/.gradle/caches/transforms-3/67e217aea58f5baeaf92995d879279ca/transformed/maps-compose-4.3.0/AndroidManifest.xml:17:1-22:12
 MERGED from [androidx.hilt:hilt-navigation-compose:1.1.0] /Users/orange/.gradle/caches/transforms-3/1e53a266d01b23a250cf23943724f759/transformed/hilt-navigation-compose-1.1.0/AndroidManifest.xml:2:1-7:12
 MERGED from [androidx.hilt:hilt-navigation:1.1.0] /Users/orange/.gradle/caches/transforms-3/dcd7edf4ef816c0024e617c0b306f547/transformed/hilt-navigation-1.1.0/AndroidManifest.xml:2:1-7:12
@@ -171,8 +171,8 @@ ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:11:22-83
 application
-ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:13:5-47:19
-INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:13:5-47:19
+ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:13:5-48:19
+INJECTED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:13:5-48:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.5.4] /Users/orange/.gradle/caches/transforms-3/79e6dcbff45433ac0c2b26ff85cdbc58/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-tooling-android:1.5.4] /Users/orange/.gradle/caches/transforms-3/79e6dcbff45433ac0c2b26ff85cdbc58/transformed/ui-tooling-release/AndroidManifest.xml:22:5-26:19
 MERGED from [androidx.compose.ui:ui-test-manifest:1.5.4] /Users/orange/.gradle/caches/transforms-3/96c93a4485e4e38b081dee6e75412cce/transformed/ui-test-manifest-1.5.4/AndroidManifest.xml:22:5-26:19
@@ -290,9 +290,11 @@ ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManife
 	android:name
 		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:40:13-53
 receiver#com.georescue.victim.service.GeofenceBroadcastReceiver
-ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:44:9-46:39
+ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:44:9-47:39
+	android:enabled
+		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:46:13-35
 	android:exported
-		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:46:13-36
+		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:47:13-36
 	android:name
 		ADDED from /Users/orange/Desktop/GeoRescue AI/android/app/src/main/AndroidManifest.xml:45:13-62
 uses-sdk

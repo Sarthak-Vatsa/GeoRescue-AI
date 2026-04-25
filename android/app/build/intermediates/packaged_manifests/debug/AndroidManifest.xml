@@ -75,6 +75,7 @@
 
         <receiver
             android:name="com.georescue.victim.service.GeofenceBroadcastReceiver"
+            android:enabled="true"
             android:exported="true" />
 
         <activity
