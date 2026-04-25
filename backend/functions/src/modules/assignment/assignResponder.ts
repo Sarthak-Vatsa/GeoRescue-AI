@@ -75,6 +75,6 @@ export async function assignResponder(
     logger.info(`Successfully assigned responder ${nearestResponderId} to incident ${incidentId}`);
   } catch (error) {
     logger.error(`Error assigning responder to incident ${incidentId}:`, error);
-    return; // Propagate error per MVP simple logic
+    throw error;
   }
 }

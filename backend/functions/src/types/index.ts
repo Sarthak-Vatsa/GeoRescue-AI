@@ -1,4 +1,4 @@
-import {Timestamp} from "firebase-admin/firestore";
+import { Timestamp } from "firebase-admin/firestore";
 
 export interface Location {
   lat: number;
@@ -9,7 +9,7 @@ export interface User {
   name: string;
   role: "victim" | "responder" | "admin";
   status: "active" | "inactive";
-  lastKnownLocation: {
+  lastKnownLocation?: {
     lat: number;
     lng: number;
     updatedAt: Timestamp;

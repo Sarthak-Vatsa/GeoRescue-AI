@@ -20,3 +20,5 @@ export interface User {
         updatedAt: FirebaseFirestore.Timestamp;
     };
 }
+
+export { handleStateEvent } from "./modules/state/onStateEvent";
