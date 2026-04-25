@@ -29,6 +29,14 @@ class GeofenceBroadcastReceiver : BroadcastReceiver() {
     }
 
     private fun startDetectionService(context: Context) {
+        val sharedPrefs = context.getSharedPreferences("GeoRescuePrefs", Context.MODE_PRIVATE)
+        val uid = sharedPrefs.getString("USER_UID", null)
+
+        if (uid == null) {
+            Log.e("GeofenceReceiver", "UID not found. Skipping service start.")
+            return
+        }
+
         val intent = Intent(context, DetectionService::class.java).apply {
             action = DetectionService.ACTION_START
         }
