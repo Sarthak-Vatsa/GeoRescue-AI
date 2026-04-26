@@ -2,6 +2,7 @@ package com.georescue.victim;
 
 import com.georescue.victim.di.FirebaseModule;
 import com.georescue.victim.di.LocationModule;
+import com.georescue.victim.di.SensorModule;
 import com.georescue.victim.presentation.MainActivity_GeneratedInjector;
 import com.georescue.victim.service.DetectionService_GeneratedInjector;
 import dagger.Binds;
@@ -133,7 +134,8 @@ public final class GeoRescueApp_HiltComponents {
           ActivityRetainedCBuilderModule.class,
           ServiceCBuilderModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
-          LocationModule.class
+          LocationModule.class,
+          SensorModule.class
       }
   )
   @Singleton

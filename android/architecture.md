@@ -57,6 +57,8 @@ incidents/{incidentId}
     "resolvedAt": "timestamp?"
   }
 }
+```
+
 🔹 [Firestore] risk_zones collection
 risk_zones/{zoneId}
 
