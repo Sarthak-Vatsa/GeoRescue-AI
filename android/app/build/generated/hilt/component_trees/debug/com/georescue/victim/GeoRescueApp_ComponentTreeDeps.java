@@ -20,6 +20,7 @@ import dagger.hilt.processor.internal.definecomponent.codegen._dagger_hilt_compo
 import hilt_aggregated_deps._com_georescue_victim_GeoRescueApp_GeneratedInjector;
 import hilt_aggregated_deps._com_georescue_victim_di_FirebaseModule;
 import hilt_aggregated_deps._com_georescue_victim_di_LocationModule;
+import hilt_aggregated_deps._com_georescue_victim_di_SensorModule;
 import hilt_aggregated_deps._com_georescue_victim_presentation_MainActivity_GeneratedInjector;
 import hilt_aggregated_deps._com_georescue_victim_service_DetectionService_GeneratedInjector;
 import hilt_aggregated_deps._dagger_hilt_android_flags_FragmentGetContextFix_FragmentGetContextFixEntryPoint;
@@ -65,6 +66,7 @@ import hilt_aggregated_deps._dagger_hilt_android_internal_modules_HiltWrapper_Ac
         _com_georescue_victim_GeoRescueApp_GeneratedInjector.class,
         _com_georescue_victim_di_FirebaseModule.class,
         _com_georescue_victim_di_LocationModule.class,
+        _com_georescue_victim_di_SensorModule.class,
         _com_georescue_victim_presentation_MainActivity_GeneratedInjector.class,
         _com_georescue_victim_service_DetectionService_GeneratedInjector.class,
         _dagger_hilt_android_flags_FragmentGetContextFix_FragmentGetContextFixEntryPoint.class,

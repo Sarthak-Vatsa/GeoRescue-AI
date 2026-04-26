@@ -16,6 +16,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.georescue.victim.data.LiveStatusStreamer
+import com.georescue.victim.domain.usecases.FailsafeTimer
+import com.georescue.victim.domain.usecases.InactivityUseCase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
@@ -34,6 +36,12 @@ class DetectionService : Service() {
 
     @Inject
     lateinit var liveStatusStreamer: LiveStatusStreamer
+
+    @Inject
+    lateinit var inactivityUseCase: InactivityUseCase
+
+    @Inject
+    lateinit var failsafeTimer: FailsafeTimer
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
 
@@ -64,7 +72,7 @@ class DetectionService : Service() {
         //Log.d("DETECTION_SERVICE", "Foreground service started")
         
         setupRTDBPresence()
-        startTelemetryStream()
+        startDetectionPipelines()
     }
 
     private fun setupRTDBPresence() {
@@ -125,10 +133,28 @@ class DetectionService : Service() {
         }
     }
 
-    private fun startTelemetryStream() {
+    private fun startDetectionPipelines() {
+
+        Log.d("DETECTION_SERVICE", "Starting telemetry + inactivity monitoring")
+
         serviceScope.launch {
-            //Log.d("DETECTION_SERVICE", "Starting live telemetry stream")
             liveStatusStreamer.startStreaming()
+        }
+
+        // 🔹 Stream 2 (sensor + inactivity)
+        serviceScope.launch {
+            inactivityUseCase.monitorInactivity().collect { isInactive ->
+
+                Log.d("INACTIVITY", "Inactive: $isInactive")
+
+                if (isInactive) {
+                    Log.d("TIMER", "Starting timer")
+                    failsafeTimer.startTimer(serviceScope)
+                } else {
+                    Log.d("TIMER", "Resetting timer")
+                    failsafeTimer.resetTimer()
+                }
+            }
         }
     }
 
