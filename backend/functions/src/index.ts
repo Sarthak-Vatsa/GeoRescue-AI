@@ -21,4 +21,3 @@ export interface User {
     };
 }
 
-export { handleStateEvent } from "./modules/state/onStateEvent";
