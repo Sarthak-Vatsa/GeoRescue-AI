@@ -16,6 +16,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ServerValue
 import com.georescue.victim.data.LiveStatusStreamer
+import com.georescue.victim.data.repository.IncidentObserver
 import com.georescue.victim.domain.usecases.FailsafeTimer
 import com.georescue.victim.domain.usecases.InactivityUseCase
 import kotlinx.coroutines.CoroutineScope
@@ -42,6 +43,9 @@ class DetectionService : Service() {
 
     @Inject
     lateinit var failsafeTimer: FailsafeTimer
+
+    @Inject
+    lateinit var incidentObserver: IncidentObserver
 
     private val serviceScope = CoroutineScope(Dispatchers.IO + Job())
 
@@ -70,8 +74,9 @@ class DetectionService : Service() {
         startForeground(NOTIFICATION_ID, notification)
 
         //Log.d("DETECTION_SERVICE", "Foreground service started")
-        
+
         setupRTDBPresence()
+        incidentObserver.startObserving()
         startDetectionPipelines()
     }
 
@@ -170,6 +175,7 @@ class DetectionService : Service() {
             )
             presenceRef.setValue(offlineData)
         }
+        incidentObserver.stopObserving()
         serviceScope.cancel()
     }
 

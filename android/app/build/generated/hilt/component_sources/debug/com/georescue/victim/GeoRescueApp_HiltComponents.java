@@ -2,7 +2,9 @@ package com.georescue.victim;
 
 import com.georescue.victim.di.FirebaseModule;
 import com.georescue.victim.di.LocationModule;
+import com.georescue.victim.di.RepositoryModule;
 import com.georescue.victim.di.SensorModule;
+import com.georescue.victim.presentation.IncidentViewModel_HiltModules;
 import com.georescue.victim.presentation.MainActivity_GeneratedInjector;
 import com.georescue.victim.service.DetectionService_GeneratedInjector;
 import dagger.Binds;
@@ -135,6 +137,7 @@ public final class GeoRescueApp_HiltComponents {
           ServiceCBuilderModule.class,
           HiltWrapper_FragmentGetContextFix_FragmentGetContextFixModule.class,
           LocationModule.class,
+          RepositoryModule.class,
           SensorModule.class
       }
   )
@@ -162,7 +165,8 @@ public final class GeoRescueApp_HiltComponents {
           ActivityCBuilderModule.class,
           ViewModelCBuilderModule.class,
           HiltWrapper_ActivityRetainedComponentManager_LifecycleModule.class,
-          HiltWrapper_SavedStateHandleModule.class
+          HiltWrapper_SavedStateHandleModule.class,
+          IncidentViewModel_HiltModules.KeyModule.class
       }
   )
   @ActivityRetainedScoped
@@ -197,7 +201,10 @@ public final class GeoRescueApp_HiltComponents {
   }
 
   @Subcomponent(
-      modules = HiltWrapper_HiltViewModelFactory_ViewModelModule.class
+      modules = {
+          HiltWrapper_HiltViewModelFactory_ViewModelModule.class,
+          IncidentViewModel_HiltModules.BindsModule.class
+      }
   )
   @ViewModelScoped
   public abstract static class ViewModelC implements ViewModelComponent,

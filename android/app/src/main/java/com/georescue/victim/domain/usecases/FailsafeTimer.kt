@@ -1,6 +1,7 @@
 package com.georescue.victim.domain.usecases
 
 import android.util.Log
+import com.georescue.victim.domain.models.SignalType
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
@@ -33,7 +34,8 @@ class FailsafeTimer @Inject constructor(
             if (_remainingTime.value == 0) {
                 // Time's up! Trigger SOS signal
                 Log.d("TIMER", "Triggering SOS")
-                signalUseCase.triggerSOS()
+                signalUseCase.invoke(SignalType.SOS)
+                //signalUseCase.triggerSOS()
             }
         }
     }
