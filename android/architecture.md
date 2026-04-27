@@ -66,7 +66,7 @@ JSON
 {
   "name": "string",
   "type": "landslide" | "earthquake",
-  "center": { "lat": "string", "lng": "string" },
+  "center": { "lat": "string", "lng": "string" },![Screenshot 2026-04-27 at 13.50.03.png](../../../../../var/folders/tx/psfs0c4d6sv7m70lvl_1y78w0000gn/T/TemporaryItems/NSIRD_screencaptureui_4ytJ5Z/Screenshot%202026-04-27%20at%2013.50.03.png)
   "radius": "number",
   "severity": "low" | "medium" | "high",
   "updatedAt": "timestamp"

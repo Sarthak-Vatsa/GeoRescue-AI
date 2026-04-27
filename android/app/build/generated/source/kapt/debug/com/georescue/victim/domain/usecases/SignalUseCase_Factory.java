@@ -1,10 +1,12 @@
 package com.georescue.victim.domain.usecases;
 
+import com.georescue.victim.data.repository.SignalRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
 import dagger.internal.QualifierMetadata;
 import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
+import javax.inject.Provider;
 
 @ScopeMetadata
 @QualifierMetadata
@@ -21,20 +23,22 @@ import javax.annotation.processing.Generated;
     "cast"
 })
 public final class SignalUseCase_Factory implements Factory<SignalUseCase> {
+  private final Provider<SignalRepository> signalRepositoryProvider;
+
+  public SignalUseCase_Factory(Provider<SignalRepository> signalRepositoryProvider) {
+    this.signalRepositoryProvider = signalRepositoryProvider;
+  }
+
   @Override
   public SignalUseCase get() {
-    return newInstance();
+    return newInstance(signalRepositoryProvider.get());
   }
 
-  public static SignalUseCase_Factory create() {
-    return InstanceHolder.INSTANCE;
+  public static SignalUseCase_Factory create(Provider<SignalRepository> signalRepositoryProvider) {
+    return new SignalUseCase_Factory(signalRepositoryProvider);
   }
 
-  public static SignalUseCase newInstance() {
-    return new SignalUseCase();
-  }
-
-  private static final class InstanceHolder {
-    private static final SignalUseCase_Factory INSTANCE = new SignalUseCase_Factory();
+  public static SignalUseCase newInstance(SignalRepository signalRepository) {
+    return new SignalUseCase(signalRepository);
   }
 }

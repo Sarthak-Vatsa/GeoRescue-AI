@@ -1,6 +1,7 @@
 package com.georescue.victim.service;
 
 import com.georescue.victim.data.LiveStatusStreamer;
+import com.georescue.victim.data.repository.IncidentObserver;
 import com.georescue.victim.domain.usecases.FailsafeTimer;
 import com.georescue.victim.domain.usecases.InactivityUseCase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -36,24 +37,29 @@ public final class DetectionService_MembersInjector implements MembersInjector<D
 
   private final Provider<FailsafeTimer> failsafeTimerProvider;
 
+  private final Provider<IncidentObserver> incidentObserverProvider;
+
   public DetectionService_MembersInjector(Provider<FirebaseAuth> authProvider,
       Provider<FirebaseDatabase> databaseProvider,
       Provider<LiveStatusStreamer> liveStatusStreamerProvider,
       Provider<InactivityUseCase> inactivityUseCaseProvider,
-      Provider<FailsafeTimer> failsafeTimerProvider) {
+      Provider<FailsafeTimer> failsafeTimerProvider,
+      Provider<IncidentObserver> incidentObserverProvider) {
     this.authProvider = authProvider;
     this.databaseProvider = databaseProvider;
     this.liveStatusStreamerProvider = liveStatusStreamerProvider;
     this.inactivityUseCaseProvider = inactivityUseCaseProvider;
     this.failsafeTimerProvider = failsafeTimerProvider;
+    this.incidentObserverProvider = incidentObserverProvider;
   }
 
   public static MembersInjector<DetectionService> create(Provider<FirebaseAuth> authProvider,
       Provider<FirebaseDatabase> databaseProvider,
       Provider<LiveStatusStreamer> liveStatusStreamerProvider,
       Provider<InactivityUseCase> inactivityUseCaseProvider,
-      Provider<FailsafeTimer> failsafeTimerProvider) {
-    return new DetectionService_MembersInjector(authProvider, databaseProvider, liveStatusStreamerProvider, inactivityUseCaseProvider, failsafeTimerProvider);
+      Provider<FailsafeTimer> failsafeTimerProvider,
+      Provider<IncidentObserver> incidentObserverProvider) {
+    return new DetectionService_MembersInjector(authProvider, databaseProvider, liveStatusStreamerProvider, inactivityUseCaseProvider, failsafeTimerProvider, incidentObserverProvider);
   }
 
   @Override
@@ -63,6 +69,7 @@ public final class DetectionService_MembersInjector implements MembersInjector<D
     injectLiveStatusStreamer(instance, liveStatusStreamerProvider.get());
     injectInactivityUseCase(instance, inactivityUseCaseProvider.get());
     injectFailsafeTimer(instance, failsafeTimerProvider.get());
+    injectIncidentObserver(instance, incidentObserverProvider.get());
   }
 
   @InjectedFieldSignature("com.georescue.victim.service.DetectionService.auth")
@@ -90,5 +97,11 @@ public final class DetectionService_MembersInjector implements MembersInjector<D
   @InjectedFieldSignature("com.georescue.victim.service.DetectionService.failsafeTimer")
   public static void injectFailsafeTimer(DetectionService instance, FailsafeTimer failsafeTimer) {
     instance.failsafeTimer = failsafeTimer;
+  }
+
+  @InjectedFieldSignature("com.georescue.victim.service.DetectionService.incidentObserver")
+  public static void injectIncidentObserver(DetectionService instance,
+      IncidentObserver incidentObserver) {
+    instance.incidentObserver = incidentObserver;
   }
 }

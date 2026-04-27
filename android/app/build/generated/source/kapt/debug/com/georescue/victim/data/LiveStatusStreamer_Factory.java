@@ -1,5 +1,7 @@
 package com.georescue.victim.data;
 
+import com.georescue.victim.data.repository.SignalRepository;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
 import dagger.internal.DaggerGenerated;
@@ -28,23 +30,41 @@ public final class LiveStatusStreamer_Factory implements Factory<LiveStatusStrea
 
   private final Provider<FirebaseDatabase> databaseProvider;
 
+  private final Provider<FusedLocationProviderClient> fusedLocationProvider;
+
+  private final Provider<BatteryReader> batteryReaderProvider;
+
+  private final Provider<SignalRepository> signalRepositoryProvider;
+
   public LiveStatusStreamer_Factory(Provider<FirebaseAuth> authProvider,
-      Provider<FirebaseDatabase> databaseProvider) {
+      Provider<FirebaseDatabase> databaseProvider,
+      Provider<FusedLocationProviderClient> fusedLocationProvider,
+      Provider<BatteryReader> batteryReaderProvider,
+      Provider<SignalRepository> signalRepositoryProvider) {
     this.authProvider = authProvider;
     this.databaseProvider = databaseProvider;
+    this.fusedLocationProvider = fusedLocationProvider;
+    this.batteryReaderProvider = batteryReaderProvider;
+    this.signalRepositoryProvider = signalRepositoryProvider;
   }
 
   @Override
   public LiveStatusStreamer get() {
-    return newInstance(authProvider.get(), databaseProvider.get());
+    LiveStatusStreamer instance = newInstance(authProvider.get(), databaseProvider.get(), fusedLocationProvider.get(), batteryReaderProvider.get());
+    LiveStatusStreamer_MembersInjector.injectSignalRepository(instance, signalRepositoryProvider.get());
+    return instance;
   }
 
   public static LiveStatusStreamer_Factory create(Provider<FirebaseAuth> authProvider,
-      Provider<FirebaseDatabase> databaseProvider) {
-    return new LiveStatusStreamer_Factory(authProvider, databaseProvider);
+      Provider<FirebaseDatabase> databaseProvider,
+      Provider<FusedLocationProviderClient> fusedLocationProvider,
+      Provider<BatteryReader> batteryReaderProvider,
+      Provider<SignalRepository> signalRepositoryProvider) {
+    return new LiveStatusStreamer_Factory(authProvider, databaseProvider, fusedLocationProvider, batteryReaderProvider, signalRepositoryProvider);
   }
 
-  public static LiveStatusStreamer newInstance(FirebaseAuth auth, FirebaseDatabase database) {
-    return new LiveStatusStreamer(auth, database);
+  public static LiveStatusStreamer newInstance(FirebaseAuth auth, FirebaseDatabase database,
+      FusedLocationProviderClient fusedLocation, BatteryReader batteryReader) {
+    return new LiveStatusStreamer(auth, database, fusedLocation, batteryReader);
   }
 }

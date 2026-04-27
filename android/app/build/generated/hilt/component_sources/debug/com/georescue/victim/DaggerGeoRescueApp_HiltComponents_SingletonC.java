@@ -7,24 +7,33 @@ import android.view.View;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
+import com.georescue.victim.data.BatteryReader;
 import com.georescue.victim.data.LiveStatusStreamer;
+import com.georescue.victim.data.LiveStatusStreamer_Factory;
+import com.georescue.victim.data.LiveStatusStreamer_MembersInjector;
 import com.georescue.victim.data.repository.AuthRepository;
+import com.georescue.victim.data.repository.IncidentObserver;
 import com.georescue.victim.data.repository.RiskZoneRepository;
 import com.georescue.victim.data.repository.SensorRepository;
+import com.georescue.victim.data.repository.SignalRepositoryImpl;
 import com.georescue.victim.di.FirebaseModule_ProvideFirebaseAuthFactory;
 import com.georescue.victim.di.FirebaseModule_ProvideFirebaseDatabaseFactory;
 import com.georescue.victim.di.FirebaseModule_ProvideFirebaseFirestoreFactory;
+import com.georescue.victim.di.LocationModule_ProvideFusedLocationProviderClientFactory;
 import com.georescue.victim.di.LocationModule_ProvideGeofencingClientFactory;
 import com.georescue.victim.di.SensorModule_ProvideSensorManagerFactory;
 import com.georescue.victim.di.SensorModule_ProvideSensorRepositoryFactory;
 import com.georescue.victim.domain.usecases.FailsafeTimer;
 import com.georescue.victim.domain.usecases.InactivityUseCase;
 import com.georescue.victim.domain.usecases.SignalUseCase;
+import com.georescue.victim.presentation.IncidentViewModel;
+import com.georescue.victim.presentation.IncidentViewModel_HiltModules;
 import com.georescue.victim.presentation.MainActivity;
 import com.georescue.victim.presentation.MainActivity_MembersInjector;
 import com.georescue.victim.service.DetectionService;
 import com.georescue.victim.service.DetectionService_MembersInjector;
 import com.georescue.victim.service.GeofenceManager;
+import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
@@ -49,11 +58,14 @@ import dagger.hilt.android.internal.modules.ApplicationContextModule;
 import dagger.hilt.android.internal.modules.ApplicationContextModule_ProvideContextFactory;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.DoubleCheck;
+import dagger.internal.IdentifierNameString;
+import dagger.internal.KeepFieldType;
+import dagger.internal.LazyClassKeyMap;
 import dagger.internal.Preconditions;
+import dagger.internal.Provider;
 import java.util.Map;
 import java.util.Set;
 import javax.annotation.processing.Generated;
-import javax.inject.Provider;
 
 @DaggerGenerated
 @Generated(
@@ -383,12 +395,12 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
 
     @Override
     public DefaultViewModelFactories.InternalFactoryFactory getHiltInternalFactoryFactory() {
-      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(ImmutableMap.<Class<?>, Boolean>of(), new ViewModelCBuilder(singletonCImpl, activityRetainedCImpl));
+      return DefaultViewModelFactories_InternalFactoryFactory_Factory.newInstance(getViewModelKeys(), new ViewModelCBuilder(singletonCImpl, activityRetainedCImpl));
     }
 
     @Override
     public Map<Class<?>, Boolean> getViewModelKeys() {
-      return ImmutableMap.<Class<?>, Boolean>of();
+      return LazyClassKeyMap.<Boolean>of(ImmutableMap.<String, Boolean>of(LazyClassKeyProvider.com_georescue_victim_presentation_IncidentViewModel, IncidentViewModel_HiltModules.KeyModule.provide()));
     }
 
     @Override
@@ -413,6 +425,14 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       MainActivity_MembersInjector.injectGeofenceManager(instance, singletonCImpl.geofenceManagerProvider.get());
       return instance;
     }
+
+    @IdentifierNameString
+    private static final class LazyClassKeyProvider {
+      static String com_georescue_victim_presentation_IncidentViewModel = "com.georescue.victim.presentation.IncidentViewModel";
+
+      @KeepFieldType
+      IncidentViewModel com_georescue_victim_presentation_IncidentViewModel2;
+    }
   }
 
   private static final class ViewModelCImpl extends GeoRescueApp_HiltComponents.ViewModelC {
@@ -422,23 +442,69 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
 
     private final ViewModelCImpl viewModelCImpl = this;
 
+    private Provider<IncidentViewModel> incidentViewModelProvider;
+
     private ViewModelCImpl(SingletonCImpl singletonCImpl,
         ActivityRetainedCImpl activityRetainedCImpl, SavedStateHandle savedStateHandleParam,
         ViewModelLifecycle viewModelLifecycleParam) {
       this.singletonCImpl = singletonCImpl;
       this.activityRetainedCImpl = activityRetainedCImpl;
 
+      initialize(savedStateHandleParam, viewModelLifecycleParam);
 
     }
 
+    @SuppressWarnings("unchecked")
+    private void initialize(final SavedStateHandle savedStateHandleParam,
+        final ViewModelLifecycle viewModelLifecycleParam) {
+      this.incidentViewModelProvider = new SwitchingProvider<>(singletonCImpl, activityRetainedCImpl, viewModelCImpl, 0);
+    }
+
     @Override
-    public Map<Class<?>, Provider<ViewModel>> getHiltViewModelMap() {
-      return ImmutableMap.<Class<?>, Provider<ViewModel>>of();
+    public Map<Class<?>, javax.inject.Provider<ViewModel>> getHiltViewModelMap() {
+      return LazyClassKeyMap.<javax.inject.Provider<ViewModel>>of(ImmutableMap.<String, javax.inject.Provider<ViewModel>>of(LazyClassKeyProvider.com_georescue_victim_presentation_IncidentViewModel, ((Provider) incidentViewModelProvider)));
     }
 
     @Override
     public Map<Class<?>, Object> getHiltViewModelAssistedMap() {
       return ImmutableMap.<Class<?>, Object>of();
+    }
+
+    @IdentifierNameString
+    private static final class LazyClassKeyProvider {
+      static String com_georescue_victim_presentation_IncidentViewModel = "com.georescue.victim.presentation.IncidentViewModel";
+
+      @KeepFieldType
+      IncidentViewModel com_georescue_victim_presentation_IncidentViewModel2;
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
+      private final SingletonCImpl singletonCImpl;
+
+      private final ActivityRetainedCImpl activityRetainedCImpl;
+
+      private final ViewModelCImpl viewModelCImpl;
+
+      private final int id;
+
+      SwitchingProvider(SingletonCImpl singletonCImpl, ActivityRetainedCImpl activityRetainedCImpl,
+          ViewModelCImpl viewModelCImpl, int id) {
+        this.singletonCImpl = singletonCImpl;
+        this.activityRetainedCImpl = activityRetainedCImpl;
+        this.viewModelCImpl = viewModelCImpl;
+        this.id = id;
+      }
+
+      @SuppressWarnings("unchecked")
+      @Override
+      public T get() {
+        switch (id) {
+          case 0: // com.georescue.victim.presentation.IncidentViewModel 
+          return (T) new IncidentViewModel(singletonCImpl.incidentObserverProvider.get());
+
+          default: throw new AssertionError(id);
+        }
+      }
     }
   }
 
@@ -447,7 +513,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
 
     private final ActivityRetainedCImpl activityRetainedCImpl = this;
 
-    private dagger.internal.Provider<ActivityRetainedLifecycle> provideActivityRetainedLifecycleProvider;
+    private Provider<ActivityRetainedLifecycle> provideActivityRetainedLifecycleProvider;
 
     private ActivityRetainedCImpl(SingletonCImpl singletonCImpl,
         SavedStateHandleHolder savedStateHandleHolderParam) {
@@ -472,7 +538,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       return provideActivityRetainedLifecycleProvider.get();
     }
 
-    private static final class SwitchingProvider<T> implements dagger.internal.Provider<T> {
+    private static final class SwitchingProvider<T> implements Provider<T> {
       private final SingletonCImpl singletonCImpl;
 
       private final ActivityRetainedCImpl activityRetainedCImpl;
@@ -514,8 +580,12 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       return new InactivityUseCase(singletonCImpl.provideSensorRepositoryProvider.get());
     }
 
+    private SignalUseCase signalUseCase() {
+      return new SignalUseCase(singletonCImpl.signalRepositoryImplProvider.get());
+    }
+
     private FailsafeTimer failsafeTimer() {
-      return new FailsafeTimer(new SignalUseCase());
+      return new FailsafeTimer(signalUseCase());
     }
 
     @Override
@@ -530,6 +600,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       DetectionService_MembersInjector.injectLiveStatusStreamer(instance, singletonCImpl.liveStatusStreamerProvider.get());
       DetectionService_MembersInjector.injectInactivityUseCase(instance, inactivityUseCase());
       DetectionService_MembersInjector.injectFailsafeTimer(instance, failsafeTimer());
+      DetectionService_MembersInjector.injectIncidentObserver(instance, singletonCImpl.incidentObserverProvider.get());
       return instance;
     }
   }
@@ -539,25 +610,33 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
 
     private final SingletonCImpl singletonCImpl = this;
 
-    private dagger.internal.Provider<FirebaseAuth> provideFirebaseAuthProvider;
+    private Provider<FirebaseAuth> provideFirebaseAuthProvider;
 
-    private dagger.internal.Provider<AuthRepository> authRepositoryProvider;
+    private Provider<AuthRepository> authRepositoryProvider;
 
-    private dagger.internal.Provider<FirebaseFirestore> provideFirebaseFirestoreProvider;
+    private Provider<FirebaseFirestore> provideFirebaseFirestoreProvider;
 
-    private dagger.internal.Provider<RiskZoneRepository> riskZoneRepositoryProvider;
+    private Provider<RiskZoneRepository> riskZoneRepositoryProvider;
 
-    private dagger.internal.Provider<GeofencingClient> provideGeofencingClientProvider;
+    private Provider<GeofencingClient> provideGeofencingClientProvider;
 
-    private dagger.internal.Provider<GeofenceManager> geofenceManagerProvider;
+    private Provider<GeofenceManager> geofenceManagerProvider;
 
-    private dagger.internal.Provider<FirebaseDatabase> provideFirebaseDatabaseProvider;
+    private Provider<IncidentObserver> incidentObserverProvider;
 
-    private dagger.internal.Provider<LiveStatusStreamer> liveStatusStreamerProvider;
+    private Provider<FirebaseDatabase> provideFirebaseDatabaseProvider;
 
-    private dagger.internal.Provider<SensorManager> provideSensorManagerProvider;
+    private Provider<FusedLocationProviderClient> provideFusedLocationProviderClientProvider;
 
-    private dagger.internal.Provider<SensorRepository> provideSensorRepositoryProvider;
+    private Provider<BatteryReader> batteryReaderProvider;
+
+    private Provider<SignalRepositoryImpl> signalRepositoryImplProvider;
+
+    private Provider<LiveStatusStreamer> liveStatusStreamerProvider;
+
+    private Provider<SensorManager> provideSensorManagerProvider;
+
+    private Provider<SensorRepository> provideSensorRepositoryProvider;
 
     private SingletonCImpl(ApplicationContextModule applicationContextModuleParam) {
       this.applicationContextModule = applicationContextModuleParam;
@@ -573,10 +652,14 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       this.riskZoneRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<RiskZoneRepository>(singletonCImpl, 2));
       this.provideGeofencingClientProvider = DoubleCheck.provider(new SwitchingProvider<GeofencingClient>(singletonCImpl, 5));
       this.geofenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<GeofenceManager>(singletonCImpl, 4));
-      this.provideFirebaseDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<FirebaseDatabase>(singletonCImpl, 6));
-      this.liveStatusStreamerProvider = DoubleCheck.provider(new SwitchingProvider<LiveStatusStreamer>(singletonCImpl, 7));
-      this.provideSensorManagerProvider = DoubleCheck.provider(new SwitchingProvider<SensorManager>(singletonCImpl, 9));
-      this.provideSensorRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SensorRepository>(singletonCImpl, 8));
+      this.incidentObserverProvider = DoubleCheck.provider(new SwitchingProvider<IncidentObserver>(singletonCImpl, 6));
+      this.provideFirebaseDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<FirebaseDatabase>(singletonCImpl, 7));
+      this.provideFusedLocationProviderClientProvider = DoubleCheck.provider(new SwitchingProvider<FusedLocationProviderClient>(singletonCImpl, 9));
+      this.batteryReaderProvider = DoubleCheck.provider(new SwitchingProvider<BatteryReader>(singletonCImpl, 10));
+      this.signalRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<SignalRepositoryImpl>(singletonCImpl, 11));
+      this.liveStatusStreamerProvider = DoubleCheck.provider(new SwitchingProvider<LiveStatusStreamer>(singletonCImpl, 8));
+      this.provideSensorManagerProvider = DoubleCheck.provider(new SwitchingProvider<SensorManager>(singletonCImpl, 13));
+      this.provideSensorRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SensorRepository>(singletonCImpl, 12));
     }
 
     @Override
@@ -598,7 +681,13 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       return new ServiceCBuilder(singletonCImpl);
     }
 
-    private static final class SwitchingProvider<T> implements dagger.internal.Provider<T> {
+    @CanIgnoreReturnValue
+    private LiveStatusStreamer injectLiveStatusStreamer(LiveStatusStreamer instance) {
+      LiveStatusStreamer_MembersInjector.injectSignalRepository(instance, signalRepositoryImplProvider.get());
+      return instance;
+    }
+
+    private static final class SwitchingProvider<T> implements Provider<T> {
       private final SingletonCImpl singletonCImpl;
 
       private final int id;
@@ -630,16 +719,28 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
           case 5: // com.google.android.gms.location.GeofencingClient 
           return (T) LocationModule_ProvideGeofencingClientFactory.provideGeofencingClient(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 6: // com.google.firebase.database.FirebaseDatabase 
+          case 6: // com.georescue.victim.data.repository.IncidentObserver 
+          return (T) new IncidentObserver(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseFirestoreProvider.get());
+
+          case 7: // com.google.firebase.database.FirebaseDatabase 
           return (T) FirebaseModule_ProvideFirebaseDatabaseFactory.provideFirebaseDatabase();
 
-          case 7: // com.georescue.victim.data.LiveStatusStreamer 
-          return (T) new LiveStatusStreamer(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseDatabaseProvider.get());
+          case 8: // com.georescue.victim.data.LiveStatusStreamer 
+          return (T) singletonCImpl.injectLiveStatusStreamer(LiveStatusStreamer_Factory.newInstance(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseDatabaseProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get(), singletonCImpl.batteryReaderProvider.get()));
 
-          case 8: // com.georescue.victim.data.repository.SensorRepository 
+          case 9: // com.google.android.gms.location.FusedLocationProviderClient 
+          return (T) LocationModule_ProvideFusedLocationProviderClientFactory.provideFusedLocationProviderClient(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 10: // com.georescue.victim.data.BatteryReader 
+          return (T) new BatteryReader(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
+
+          case 11: // com.georescue.victim.data.repository.SignalRepositoryImpl 
+          return (T) new SignalRepositoryImpl(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseFirestoreProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get());
+
+          case 12: // com.georescue.victim.data.repository.SensorRepository 
           return (T) SensorModule_ProvideSensorRepositoryFactory.provideSensorRepository(singletonCImpl.provideSensorManagerProvider.get());
 
-          case 9: // android.hardware.SensorManager 
+          case 13: // android.hardware.SensorManager 
           return (T) SensorModule_ProvideSensorManagerFactory.provideSensorManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           default: throw new AssertionError(id);
