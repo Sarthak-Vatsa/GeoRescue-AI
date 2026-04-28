@@ -55,9 +55,11 @@ class LiveStatusStreamer @Inject constructor(
 //    lateinit var signalRepository: SignalRepository
 
     suspend fun startStreaming() {
-        val userId = auth.currentUser?.uid ?: run {
-            Log.w("LiveStatusStreamer", "Cannot stream — user not authenticated")
-            return
+        var userId = auth.currentUser?.uid
+        while (userId == null) {
+            Log.w("LiveStatusStreamer", "Waiting for auth to stream telemetry...")
+            delay(1000)
+            userId = auth.currentUser?.uid
         }
 
         val locationsRef = database.getReference("locations").child(userId)
