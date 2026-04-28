@@ -1,3 +1,48 @@
 <resources>
     <string name="app_name">GeoRescue AI</string>
+
+    <!-- Permission Screen -->
+    <string name="permission_title">GeoRescue AI</string>
+    <string name="permission_tagline">Real-time rescue. When every second counts.</string>
+    <string name="permission_body">Location access is required to detect risk zones and dispatch emergency services automatically.</string>
+    <string name="permission_grant_btn">Grant Location Access</string>
+    <string name="permission_bg_rationale_title">Background Location Required</string>
+    <string name="permission_bg_rationale_body">GeoRescue needs background location to detect risk zones even when the app is closed.</string>
+    <string name="permission_grant">Grant</string>
+    <string name="permission_skip">Not Now</string>
+
+    <!-- Monitoring Screen -->
+    <string name="monitoring_title">MONITORING SENSORS</string>
+    <string name="monitoring_status_safe">SAFE ZONE</string>
+    <string name="monitoring_status_risk">RISK ZONE ACTIVE</string>
+    <string name="monitoring_tab_map">MAP</string>
+    <string name="monitoring_tab_status">STATUS</string>
+    <string name="monitoring_sos_btn">SEND SOS</string>
+    <string name="monitoring_gps_active">GPS ACTIVE</string>
+    <string name="monitoring_offline">OFFLINE</string>
+    <string name="monitoring_battery">Battery</string>
+    <string name="monitoring_no_zones">No active risk zones detected</string>
+    <string name="monitoring_zone_label">RISK ZONE</string>
+
+    <!-- SOS Countdown Screen -->
+    <string name="sos_header">ARE YOU SAFE?</string>
+    <string name="sos_subtitle">Impact detected. Emergency services will be dispatched automatically.</string>
+    <string name="sos_safe_btn">I\'M SAFE</string>
+    <string name="sos_send_btn">SEND SOS NOW</string>
+    <string name="sos_seconds_remaining">seconds remaining</string>
+    <string name="sos_sending">Sending SOS…</string>
+
+    <!-- Rescue Tracking Screen -->
+    <string name="rescue_title">RESCUE ACTIVE</string>
+    <string name="rescue_unit_away">is en route</string>
+    <string name="rescue_signal_sent">Signal Sent</string>
+    <string name="rescue_authority_notified">Authority Notified</string>
+    <string name="rescue_responder_assigned">Responder Assigned</string>
+    <string name="rescue_arrival">Rescue Arrival</string>
+    <string name="rescue_pending">Pending…</string>
+    <string name="rescue_resolved">Resolved</string>
+    <string name="rescue_status_created">SIGNAL SENT</string>
+    <string name="rescue_status_assigned">RESPONDER ASSIGNED</string>
+    <string name="rescue_status_responding">RESPONDING</string>
+    <string name="rescue_status_resolved">RESOLVED</string>
 </resources>

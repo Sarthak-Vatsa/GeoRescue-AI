@@ -1,10 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="purple_200">#FFBB86FC</color>
-    <color name="purple_500">#FF6200EE</color>
-    <color name="purple_700">#FF3700B3</color>
-    <color name="teal_200">#FF03DAC5</color>
-    <color name="teal_700">#FF018786</color>
-    <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <!-- Backgrounds / Surfaces -->
+    <color name="background">#131313</color>
+    <color name="surface">#201F1F</color>
+    <color name="surface_dim">#131313</color>
+    <color name="surface_bright">#393939</color>
+    <color name="surface_container_low">#1C1B1B</color>
+    <color name="surface_container">#201F1F</color>
+    <color name="surface_container_high">#2A2A2A</color>
+    <color name="surface_container_highest">#353534</color>
+
+    <!-- Primary — Emergency Red -->
+    <color name="primary">#FFB3AC</color>
+    <color name="on_primary">#680008</color>
+    <color name="primary_container">#D32F2F</color>
+    <color name="on_primary_container">#FFF2F0</color>
+
+    <!-- Secondary — Warning Orange -->
+    <color name="secondary">#FFB786</color>
+    <color name="on_secondary">#502400</color>
+    <color name="secondary_container">#F27A00</color>
+    <color name="on_secondary_container">#542600</color>
+
+    <!-- Tertiary — Safe Green -->
+    <color name="tertiary">#82DB7E</color>
+    <color name="on_tertiary">#00390A</color>
+    <color name="tertiary_container">#298030</color>
+    <color name="on_tertiary_container">#DAFFD1</color>
+
+    <!-- Error -->
+    <color name="error">#FFB4AB</color>
+    <color name="on_error">#690005</color>
+    <color name="error_container">#93000A</color>
+    <color name="on_error_container">#FFDAD6</color>
+
+    <!-- On-Surface / Text -->
+    <color name="on_surface">#E5E2E1</color>
+    <color name="on_surface_variant">#E4BEBA</color>
+    <color name="outline">#AB8985</color>
+    <color name="outline_variant">#5B403D</color>
 </resources>
