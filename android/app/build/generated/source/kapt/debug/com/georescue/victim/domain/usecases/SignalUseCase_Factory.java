@@ -1,5 +1,6 @@
 package com.georescue.victim.domain.usecases;
 
+import com.georescue.victim.data.repository.IncidentObserver;
 import com.georescue.victim.data.repository.SignalRepository;
 import dagger.internal.DaggerGenerated;
 import dagger.internal.Factory;
@@ -8,7 +9,7 @@ import dagger.internal.ScopeMetadata;
 import javax.annotation.processing.Generated;
 import javax.inject.Provider;
 
-@ScopeMetadata
+@ScopeMetadata("javax.inject.Singleton")
 @QualifierMetadata
 @DaggerGenerated
 @Generated(
@@ -25,20 +26,26 @@ import javax.inject.Provider;
 public final class SignalUseCase_Factory implements Factory<SignalUseCase> {
   private final Provider<SignalRepository> signalRepositoryProvider;
 
-  public SignalUseCase_Factory(Provider<SignalRepository> signalRepositoryProvider) {
+  private final Provider<IncidentObserver> incidentObserverProvider;
+
+  public SignalUseCase_Factory(Provider<SignalRepository> signalRepositoryProvider,
+      Provider<IncidentObserver> incidentObserverProvider) {
     this.signalRepositoryProvider = signalRepositoryProvider;
+    this.incidentObserverProvider = incidentObserverProvider;
   }
 
   @Override
   public SignalUseCase get() {
-    return newInstance(signalRepositoryProvider.get());
+    return newInstance(signalRepositoryProvider.get(), incidentObserverProvider.get());
   }
 
-  public static SignalUseCase_Factory create(Provider<SignalRepository> signalRepositoryProvider) {
-    return new SignalUseCase_Factory(signalRepositoryProvider);
+  public static SignalUseCase_Factory create(Provider<SignalRepository> signalRepositoryProvider,
+      Provider<IncidentObserver> incidentObserverProvider) {
+    return new SignalUseCase_Factory(signalRepositoryProvider, incidentObserverProvider);
   }
 
-  public static SignalUseCase newInstance(SignalRepository signalRepository) {
-    return new SignalUseCase(signalRepository);
+  public static SignalUseCase newInstance(SignalRepository signalRepository,
+      IncidentObserver incidentObserver) {
+    return new SignalUseCase(signalRepository, incidentObserver);
   }
 }

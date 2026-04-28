@@ -149,6 +149,14 @@ class DetectionService : Service() {
         // 🔹 Stream 2 (sensor + inactivity)
         serviceScope.launch {
             inactivityUseCase.monitorInactivity().collect { isInactive ->
+                val currentIncident = incidentObserver.currentIncident.value
+                val isIncidentActive = currentIncident != null && currentIncident.status != com.georescue.victim.domain.models.IncidentStatus.RESOLVED
+
+                if (isIncidentActive) {
+                    // Stop any running timer if an incident is already active
+                    failsafeTimer.resetTimer()
+                    return@collect
+                }
 
                 Log.d("INACTIVITY", "Inactive: $isInactive")
 

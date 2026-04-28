@@ -43,6 +43,9 @@ class SignalRepositoryImpl @Inject constructor(
             val latStr = location?.latitude?.toString() ?: "0.0"
             val lngStr = location?.longitude?.toString() ?: "0.0"
 
+            val latDouble = location?.latitude?.toDouble() ?: 0.0
+            val lngDouble = location?.longitude?.toDouble() ?: 0.0
+
             val signalData = mapOf(
                 "userId"    to userId,
                 "type"      to type.name,              // "SOS" or "INACTIVITY"
@@ -57,6 +60,28 @@ class SignalRepositoryImpl @Inject constructor(
 
             val docRef = firestore.collection("signals").add(signalData).await()
             Log.d("SignalRepository", "Signal sent: ${docRef.id} | type=${type.name}")
+
+            // ─── MOCK INCIDENT FOR LOCAL TESTING ──────────────────────────────
+            // Since the backend Cloud Function isn't running, we manually create
+            // the incident document so the UI's IncidentObserver reacts instantly.
+            val mockIncidentId = "INC-${System.currentTimeMillis()}"
+            val mockIncidentData = mapOf(
+                "type" to "LANDSLIDE",
+                "triggerType" to type.name,
+                "status" to "ASSIGNED", // Directly jump to ASSIGNED to show the new UI
+                "location" to mapOf("lat" to latDouble, "lng" to lngDouble),
+                "createdAt" to FieldValue.serverTimestamp(),
+                "reportedBy" to userId,
+                "assignedResponderId" to "Unit 402",
+                "confidenceScore" to 0.98,
+                "timeline" to mapOf(
+                    "assignedAt" to FieldValue.serverTimestamp()
+                )
+            )
+            firestore.collection("incidents").document(mockIncidentId).set(mockIncidentData).await()
+            Log.d("SignalRepository", "Mock incident created: $mockIncidentId")
+            // ──────────────────────────────────────────────────────────────────
+
             Result.success(docRef.id)
 
         } catch (e: Exception) {

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "com.georescue.victim.app-mergeDebugResources-61:/values-v21/values-v21.xml",
+            "outputFile": "com.georescue.victim.app-mergeDebugResources-66:/values-v21/values-v21.xml",
             "map": [
                 {
-                    "source": "/Users/orange/.gradle/caches/transforms-3/96df6878e2ae8e77f391f8d69d1b7194/transformed/core-1.12.0/res/values-v21/values-v21.xml",
+                    "source": "/Users/orange/.gradle/caches/transforms-3/1786094c69bd46380bc078f0bbe224a9/transformed/core-1.12.0/res/values-v21/values-v21.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4",
