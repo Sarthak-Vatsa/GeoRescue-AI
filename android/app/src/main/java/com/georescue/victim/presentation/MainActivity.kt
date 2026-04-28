@@ -13,6 +13,8 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import android.content.Intent
+import com.georescue.victim.service.DetectionService
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -61,6 +63,12 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun startMonitoring() {
+        // Start the DetectionService immediately so telemetry/presence is active for testing
+        val intent = Intent(this, DetectionService::class.java).apply {
+            action = DetectionService.ACTION_START
+        }
+        startService(intent)
+
         CoroutineScope(Dispatchers.Main).launch {
             riskZoneRepository.getRiskZones().collect { zones ->
                 geofenceManager.addGeofences(zones)
