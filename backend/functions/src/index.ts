@@ -9,6 +9,7 @@ setGlobalOptions({ maxInstances: 10 });
 
 // Export triggers
 export { onSignalCreated } from "./modules/signals/onSignalCreated";
+export { triggerStateUpdate } from "./modules/state/triggerStateUpdate";
 
 export interface User {
     name: string;
@@ -19,5 +20,6 @@ export interface User {
         lng: number;
         updatedAt: FirebaseFirestore.Timestamp;
     };
+    severity: "LOW" | "MEDIUM" | "HIGH";
 }
 

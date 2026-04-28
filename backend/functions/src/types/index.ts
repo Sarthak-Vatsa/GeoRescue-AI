@@ -38,4 +38,6 @@ export interface Incident {
   reportedBy: string;
   assignedResponderId: string | null;
   timeline: IncidentTimeline;
+  confidenceScore: number;
+  severity: "LOW" | "MEDIUM" | "HIGH";
 }
