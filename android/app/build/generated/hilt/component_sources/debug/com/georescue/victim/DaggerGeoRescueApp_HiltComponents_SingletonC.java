@@ -9,8 +9,6 @@ import androidx.lifecycle.SavedStateHandle;
 import androidx.lifecycle.ViewModel;
 import com.georescue.victim.data.BatteryReader;
 import com.georescue.victim.data.LiveStatusStreamer;
-import com.georescue.victim.data.LiveStatusStreamer_Factory;
-import com.georescue.victim.data.LiveStatusStreamer_MembersInjector;
 import com.georescue.victim.data.repository.AuthRepository;
 import com.georescue.victim.data.repository.IncidentObserver;
 import com.georescue.victim.data.repository.RiskZoneRepository;
@@ -500,7 +498,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       public T get() {
         switch (id) {
           case 0: // com.georescue.victim.presentation.IncidentViewModel 
-          return (T) new IncidentViewModel(singletonCImpl.incidentObserverProvider.get());
+          return (T) new IncidentViewModel(singletonCImpl.incidentObserverProvider.get(), singletonCImpl.signalUseCaseProvider.get(), singletonCImpl.failsafeTimerProvider.get(), singletonCImpl.riskZoneRepositoryProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get());
 
           default: throw new AssertionError(id);
         }
@@ -580,14 +578,6 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       return new InactivityUseCase(singletonCImpl.provideSensorRepositoryProvider.get());
     }
 
-    private SignalUseCase signalUseCase() {
-      return new SignalUseCase(singletonCImpl.signalRepositoryImplProvider.get());
-    }
-
-    private FailsafeTimer failsafeTimer() {
-      return new FailsafeTimer(signalUseCase());
-    }
-
     @Override
     public void injectDetectionService(DetectionService arg0) {
       injectDetectionService2(arg0);
@@ -599,7 +589,7 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       DetectionService_MembersInjector.injectDatabase(instance, singletonCImpl.provideFirebaseDatabaseProvider.get());
       DetectionService_MembersInjector.injectLiveStatusStreamer(instance, singletonCImpl.liveStatusStreamerProvider.get());
       DetectionService_MembersInjector.injectInactivityUseCase(instance, inactivityUseCase());
-      DetectionService_MembersInjector.injectFailsafeTimer(instance, failsafeTimer());
+      DetectionService_MembersInjector.injectFailsafeTimer(instance, singletonCImpl.failsafeTimerProvider.get());
       DetectionService_MembersInjector.injectIncidentObserver(instance, singletonCImpl.incidentObserverProvider.get());
       return instance;
     }
@@ -624,13 +614,17 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
 
     private Provider<IncidentObserver> incidentObserverProvider;
 
-    private Provider<FirebaseDatabase> provideFirebaseDatabaseProvider;
-
     private Provider<FusedLocationProviderClient> provideFusedLocationProviderClientProvider;
 
-    private Provider<BatteryReader> batteryReaderProvider;
-
     private Provider<SignalRepositoryImpl> signalRepositoryImplProvider;
+
+    private Provider<SignalUseCase> signalUseCaseProvider;
+
+    private Provider<FailsafeTimer> failsafeTimerProvider;
+
+    private Provider<FirebaseDatabase> provideFirebaseDatabaseProvider;
+
+    private Provider<BatteryReader> batteryReaderProvider;
 
     private Provider<LiveStatusStreamer> liveStatusStreamerProvider;
 
@@ -653,17 +647,19 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
       this.provideGeofencingClientProvider = DoubleCheck.provider(new SwitchingProvider<GeofencingClient>(singletonCImpl, 5));
       this.geofenceManagerProvider = DoubleCheck.provider(new SwitchingProvider<GeofenceManager>(singletonCImpl, 4));
       this.incidentObserverProvider = DoubleCheck.provider(new SwitchingProvider<IncidentObserver>(singletonCImpl, 6));
-      this.provideFirebaseDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<FirebaseDatabase>(singletonCImpl, 7));
       this.provideFusedLocationProviderClientProvider = DoubleCheck.provider(new SwitchingProvider<FusedLocationProviderClient>(singletonCImpl, 9));
-      this.batteryReaderProvider = DoubleCheck.provider(new SwitchingProvider<BatteryReader>(singletonCImpl, 10));
-      this.signalRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<SignalRepositoryImpl>(singletonCImpl, 11));
-      this.liveStatusStreamerProvider = DoubleCheck.provider(new SwitchingProvider<LiveStatusStreamer>(singletonCImpl, 8));
-      this.provideSensorManagerProvider = DoubleCheck.provider(new SwitchingProvider<SensorManager>(singletonCImpl, 13));
-      this.provideSensorRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SensorRepository>(singletonCImpl, 12));
+      this.signalRepositoryImplProvider = DoubleCheck.provider(new SwitchingProvider<SignalRepositoryImpl>(singletonCImpl, 8));
+      this.signalUseCaseProvider = DoubleCheck.provider(new SwitchingProvider<SignalUseCase>(singletonCImpl, 7));
+      this.failsafeTimerProvider = DoubleCheck.provider(new SwitchingProvider<FailsafeTimer>(singletonCImpl, 10));
+      this.provideFirebaseDatabaseProvider = DoubleCheck.provider(new SwitchingProvider<FirebaseDatabase>(singletonCImpl, 11));
+      this.batteryReaderProvider = DoubleCheck.provider(new SwitchingProvider<BatteryReader>(singletonCImpl, 13));
+      this.liveStatusStreamerProvider = DoubleCheck.provider(new SwitchingProvider<LiveStatusStreamer>(singletonCImpl, 12));
+      this.provideSensorManagerProvider = DoubleCheck.provider(new SwitchingProvider<SensorManager>(singletonCImpl, 15));
+      this.provideSensorRepositoryProvider = DoubleCheck.provider(new SwitchingProvider<SensorRepository>(singletonCImpl, 14));
     }
 
     @Override
-    public void injectGeoRescueApp(GeoRescueApp geoRescueApp) {
+    public void injectGeoRescueApp(GeoRescueApp arg0) {
     }
 
     @Override
@@ -679,12 +675,6 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
     @Override
     public ServiceComponentBuilder serviceComponentBuilder() {
       return new ServiceCBuilder(singletonCImpl);
-    }
-
-    @CanIgnoreReturnValue
-    private LiveStatusStreamer injectLiveStatusStreamer(LiveStatusStreamer instance) {
-      LiveStatusStreamer_MembersInjector.injectSignalRepository(instance, signalRepositoryImplProvider.get());
-      return instance;
     }
 
     private static final class SwitchingProvider<T> implements Provider<T> {
@@ -722,25 +712,31 @@ public final class DaggerGeoRescueApp_HiltComponents_SingletonC {
           case 6: // com.georescue.victim.data.repository.IncidentObserver 
           return (T) new IncidentObserver(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseFirestoreProvider.get());
 
-          case 7: // com.google.firebase.database.FirebaseDatabase 
-          return (T) FirebaseModule_ProvideFirebaseDatabaseFactory.provideFirebaseDatabase();
+          case 7: // com.georescue.victim.domain.usecases.SignalUseCase 
+          return (T) new SignalUseCase(singletonCImpl.signalRepositoryImplProvider.get(), singletonCImpl.incidentObserverProvider.get());
 
-          case 8: // com.georescue.victim.data.LiveStatusStreamer 
-          return (T) singletonCImpl.injectLiveStatusStreamer(LiveStatusStreamer_Factory.newInstance(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseDatabaseProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get(), singletonCImpl.batteryReaderProvider.get()));
+          case 8: // com.georescue.victim.data.repository.SignalRepositoryImpl 
+          return (T) new SignalRepositoryImpl(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseFirestoreProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get());
 
           case 9: // com.google.android.gms.location.FusedLocationProviderClient 
           return (T) LocationModule_ProvideFusedLocationProviderClientFactory.provideFusedLocationProviderClient(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 10: // com.georescue.victim.data.BatteryReader 
+          case 10: // com.georescue.victim.domain.usecases.FailsafeTimer 
+          return (T) new FailsafeTimer(singletonCImpl.signalUseCaseProvider.get());
+
+          case 11: // com.google.firebase.database.FirebaseDatabase 
+          return (T) FirebaseModule_ProvideFirebaseDatabaseFactory.provideFirebaseDatabase();
+
+          case 12: // com.georescue.victim.data.LiveStatusStreamer 
+          return (T) new LiveStatusStreamer(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseDatabaseProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get(), singletonCImpl.batteryReaderProvider.get());
+
+          case 13: // com.georescue.victim.data.BatteryReader 
           return (T) new BatteryReader(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
-          case 11: // com.georescue.victim.data.repository.SignalRepositoryImpl 
-          return (T) new SignalRepositoryImpl(singletonCImpl.provideFirebaseAuthProvider.get(), singletonCImpl.provideFirebaseFirestoreProvider.get(), singletonCImpl.provideFusedLocationProviderClientProvider.get());
-
-          case 12: // com.georescue.victim.data.repository.SensorRepository 
+          case 14: // com.georescue.victim.data.repository.SensorRepository 
           return (T) SensorModule_ProvideSensorRepositoryFactory.provideSensorRepository(singletonCImpl.provideSensorManagerProvider.get());
 
-          case 13: // android.hardware.SensorManager 
+          case 15: // android.hardware.SensorManager 
           return (T) SensorModule_ProvideSensorManagerFactory.provideSensorManager(ApplicationContextModule_ProvideContextFactory.provideContext(singletonCImpl.applicationContextModule));
 
           default: throw new AssertionError(id);

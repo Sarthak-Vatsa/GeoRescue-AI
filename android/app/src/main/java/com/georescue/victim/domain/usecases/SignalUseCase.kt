@@ -15,14 +15,31 @@ import javax.inject.Inject
  * Delegates to [SignalRepository] which writes to Firestore `signals/` collection.
  * The backend Cloud Function then creates the actual `incidents/` document.
  */
+import com.georescue.victim.data.repository.IncidentObserver
+import com.georescue.victim.domain.models.IncidentStatus
+import javax.inject.Singleton
+
+@Singleton
 class SignalUseCase @Inject constructor(
-    private val signalRepository: SignalRepository
+    private val signalRepository: SignalRepository,
+    private val incidentObserver: IncidentObserver
 ) {
-    /**
-     * Sends a signal of the given [type] to the backend.
-     * Operator overload allows [FailsafeTimer] to call `signalUseCase(SignalType.SOS)` directly.
-     */
+    private var lastSignalTime = 0L
+
     suspend operator fun invoke(type: SignalType): Result<String> {
+        val now = System.currentTimeMillis()
+        if (now - lastSignalTime < 10000) {
+            Log.d("SignalUseCase", "Debouncing signal (sent less than 10s ago)")
+            return Result.failure(IllegalStateException("Too many requests"))
+        }
+
+        val currentIncident = incidentObserver.currentIncident.value
+        if (currentIncident != null && currentIncident.status != IncidentStatus.RESOLVED) {
+            Log.d("SignalUseCase", "Skipping signal — Incident already active")
+            return Result.success("ALREADY_ACTIVE")
+        }
+
+        lastSignalTime = now
         Log.d("SignalUseCase", "Triggering signal: $type")
         return signalRepository.sendSignal(type)
             .onSuccess { id -> Log.d("SignalUseCase", "Signal sent successfully: $id") }
