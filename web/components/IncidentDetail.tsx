@@ -3,6 +3,7 @@
 import { Incident, IncidentStatus } from "@/types/incident";
 import { formatTime, cn } from "@/lib/utils";
 import { X } from "lucide-react";
+import { updateState } from "@/lib/state";
 
 interface IncidentDetailProps {
   incident: Incident | null;
@@ -27,6 +28,14 @@ const statusBgColors = {
 
 export default function IncidentDetail({ incident, onClose }: IncidentDetailProps) {
   if (!incident) return null;
+
+  const handleUpdate = async (event: "ARRIVED" | "COMPLETE") => {
+    try {
+      await updateState(incident.id, event);
+    } catch (e) {
+      console.error(e);
+    }
+  };
 
   const currentStatusIndex = LIFECYCLE.indexOf(incident.status);
 
@@ -117,6 +126,24 @@ export default function IncidentDetail({ incident, onClose }: IncidentDetailProp
              </div>
            </div>
         </div>
+
+        {incident.status === "ASSIGNED" && (
+          <button
+            onClick={() => handleUpdate("ARRIVED")}
+            className="mt-4 w-full bg-orange-600 text-white py-2 rounded"
+          >
+            Mark as Responding
+          </button>
+        )}
+
+        {incident.status === "RESPONDING" && (
+          <button
+            onClick={() => handleUpdate("COMPLETE")}
+            className="mt-4 w-full bg-green-600 text-white py-2 rounded"
+          >
+            Mark as Resolved
+          </button>
+        )}
       </div>
     </div>
   );
