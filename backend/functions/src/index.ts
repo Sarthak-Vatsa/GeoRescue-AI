@@ -20,6 +20,5 @@ export interface User {
         lng: number;
         updatedAt: FirebaseFirestore.Timestamp;
     };
-    severity: "LOW" | "MEDIUM" | "HIGH";
 }
 
